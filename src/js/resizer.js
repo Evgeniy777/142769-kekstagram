@@ -147,11 +147,11 @@
        this._ctx.fill('evenodd');
 
 
-      this._ctx.fillStyle = "#fff";
-      this._ctx.textBaseline = "top";
-      this._ctx.textAlign = "center";
-      this._ctx.font = "14pt Arial";
-      this._ctx.fillText(this._image.naturalWidth + " x " + this._image.naturalHeight, 0, (-this._resizeConstraint.side / 2) - 35);
+      this._ctx.fillStyle = '#fff';
+      this._ctx.textBaseline = 'top';
+      this._ctx.textAlign = 'center';
+      this._ctx.font = '14pt Arial';
+      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, (-this._resizeConstraint.side / 2) - 35);
 
       /*********************************/
 
