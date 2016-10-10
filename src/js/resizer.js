@@ -149,7 +149,6 @@
       this._ctx.lineTo(-rectSide / 2 - strokeWidth, rectSide / 2 - strokeWidth / 2);
       this._ctx.closePath();
       this._ctx.fill('evenodd');
-       
       this._ctx.fillStyle = '#fff';
       this._ctx.textBaseline = 'hanging';
       this._ctx.textAlign = 'center';
