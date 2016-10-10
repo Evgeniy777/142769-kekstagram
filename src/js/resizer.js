@@ -124,13 +124,12 @@
       this._ctx.lineWidth = 0;
       // Цвет обводки.
       this._ctx.fillStyle = 'rgba(0,0,0,0.8)';
-       
-       var imageWidth = this._image.naturalWidth;
-       var imageHeight = this._image.naturalHeight;
-       var strokeWidth = this._ctx.lineWidth;
-       var side = this._resizeConstraint.side;
-       var fontSize = '14';
-       var lineHeight = fontSize * 1.5;
+      var imageWidth = this._image.naturalWidth;
+      var imageHeight = this._image.naturalHeight;
+      var strokeWidth = this._ctx.lineWidth;
+      var rectSide = this._resizeConstraint.side;
+      var fontSize = '14';
+      var lineHeight = fontSize * 1.5;
 
       this._ctx.beginPath();
       this._ctx.moveTo(
@@ -142,23 +141,20 @@
       this._ctx.lineTo(-imageWidth / 2, imageHeight / 2);
 
       this._ctx.moveTo(
-          (side / 2) - strokeWidth / 2,
-          (side / 2) - strokeWidth / 2);
-      this._ctx.lineTo(side / 2 - strokeWidth / 2, side / 2 - strokeWidth);
-      this._ctx.lineTo(side / 2 - strokeWidth / 2, -side / 2 - strokeWidth);
-      this._ctx.lineTo(-side / 2 - strokeWidth, -side / 2 - strokeWidth);
-      this._ctx.lineTo(-side / 2 - strokeWidth, side / 2 - strokeWidth / 2);
+          (rectSide / 2) - strokeWidth / 2,
+          (rectSide / 2) - strokeWidth / 2);
+      this._ctx.lineTo(rectSide / 2 - strokeWidth / 2, rectSide / 2 - strokeWidth);
+      this._ctx.lineTo(rectSide / 2 - strokeWidth / 2, -rectSide / 2 - strokeWidth);
+      this._ctx.lineTo(-rectSide / 2 - strokeWidth, -rectSide / 2 - strokeWidth);
+      this._ctx.lineTo(-rectSide / 2 - strokeWidth, rectSide / 2 - strokeWidth / 2);
       this._ctx.closePath();
-
-
-       this._ctx.fill('evenodd');
-
-
+      this._ctx.fill('evenodd');
+       
       this._ctx.fillStyle = '#fff';
       this._ctx.textBaseline = 'hanging';
       this._ctx.textAlign = 'center';
       this._ctx.font = fontSize + 'pt' + ' Arial';
-      this._ctx.fillText(imageWidth + ' x ' + imageHeight, 0, (-side / 2) - strokeWidth - lineHeight);
+      this._ctx.fillText(imageWidth + ' x ' + imageHeight, 0, (-rectSide / 2) - strokeWidth - lineHeight);
 
       /*********************************/
       // Восстановление состояния канваса, которое было до вызова ctx.save
