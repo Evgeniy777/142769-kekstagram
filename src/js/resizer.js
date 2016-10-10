@@ -119,28 +119,35 @@
           this._resizeConstraint.side - this._ctx.lineWidth / 2,
           this._resizeConstraint.side - this._ctx.lineWidth / 2);
 
-      /*********************************/
+       /*********************************/
       // Толщина линии.
       this._ctx.lineWidth = 0;
       // Цвет обводки.
       this._ctx.fillStyle = 'rgba(0,0,0,0.8)';
+       
+       var imageWidth = this._image.naturalWidth;
+       var imageHeight = this._image.naturalHeight;
+       var strokeWidth = this._ctx.lineWidth;
+       var side = this._resizeConstraint.side;
+       var fontSize = '14';
+       var lineHeight = fontSize * 1.5;
 
       this._ctx.beginPath();
       this._ctx.moveTo(
-          this._image.naturalWidth / 2,
-          this._image.naturalHeight / 2);
-      this._ctx.lineTo(this._image.naturalWidth, this._image.naturalHeight);
-      this._ctx.lineTo(this._image.naturalWidth, -this._image.naturalHeight);
-      this._ctx.lineTo(-this._image.naturalWidth, -this._image.naturalHeight);
-      this._ctx.lineTo(-this._image.naturalWidth / 2, this._image.naturalHeight / 2);
+          imageWidth / 2,
+          imageHeight / 2);
+      this._ctx.lineTo(imageWidth, imageHeight);
+      this._ctx.lineTo(imageWidth, -imageHeight);
+      this._ctx.lineTo(-imageWidth, -imageHeight);
+      this._ctx.lineTo(-imageWidth / 2, imageHeight / 2);
 
       this._ctx.moveTo(
-          (this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
-          (this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2);
-      this._ctx.lineTo(this._resizeConstraint.side / 2 - this._ctx.lineWidth / 2, this._resizeConstraint.side / 2 - this._ctx.lineWidth);
-      this._ctx.lineTo(this._resizeConstraint.side / 2 - this._ctx.lineWidth / 2, -this._resizeConstraint.side / 2 - this._ctx.lineWidth);
-      this._ctx.lineTo(-this._resizeConstraint.side / 2 - this._ctx.lineWidth, -this._resizeConstraint.side / 2 - this._ctx.lineWidth);
-      this._ctx.lineTo(-this._resizeConstraint.side / 2 - this._ctx.lineWidth, this._resizeConstraint.side / 2 - this._ctx.lineWidth / 2);
+          (side / 2) - strokeWidth / 2,
+          (side / 2) - strokeWidth / 2);
+      this._ctx.lineTo(side / 2 - strokeWidth / 2, side / 2 - strokeWidth);
+      this._ctx.lineTo(side / 2 - strokeWidth / 2, -side / 2 - strokeWidth);
+      this._ctx.lineTo(-side / 2 - strokeWidth, -side / 2 - strokeWidth);
+      this._ctx.lineTo(-side / 2 - strokeWidth, side / 2 - strokeWidth / 2);
       this._ctx.closePath();
 
 
@@ -148,13 +155,12 @@
 
 
       this._ctx.fillStyle = '#fff';
-      this._ctx.textBaseline = 'top';
+      this._ctx.textBaseline = 'hanging';
       this._ctx.textAlign = 'center';
-      this._ctx.font = '14pt Arial';
-      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, (-this._resizeConstraint.side / 2) - 35);
+      this._ctx.font = fontSize + 'pt' + ' Arial';
+      this._ctx.fillText(imageWidth + ' x ' + imageHeight, 0, (-side / 2) - strokeWidth - lineHeight);
 
       /*********************************/
-
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
       // следующий кадр рисовался с привычной системой координат, где точка
