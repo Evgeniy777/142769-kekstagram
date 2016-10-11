@@ -119,41 +119,43 @@
           this._resizeConstraint.side - this._ctx.lineWidth / 2,
           this._resizeConstraint.side - this._ctx.lineWidth / 2);
 
-       /*********************************/
+      /*********************************/
       // Толщина линии.
       this._ctx.lineWidth = 0;
       // Цвет обводки.
       this._ctx.fillStyle = 'rgba(0,0,0,0.8)';
       var imageWidth = this._image.naturalWidth;
+      var imageHalfWidth = imageWidth / 2;
       var imageHeight = this._image.naturalHeight;
+      var imageHalfHeight = imageHeight / 2;
       var strokeWidth = this._ctx.lineWidth;
+      var strokeHalfWidth = this._ctx.lineWidth / 2;
       var rectSide = this._resizeConstraint.side;
+      var rectHalfSide = rectSide / 2;
       var fontSize = '14';
       var lineHeight = fontSize * 1.5;
 
       this._ctx.beginPath();
-      this._ctx.moveTo(
-          imageWidth / 2,
-          imageHeight / 2);
-      this._ctx.lineTo(imageWidth, imageHeight);
-      this._ctx.lineTo(imageWidth, -imageHeight);
-      this._ctx.lineTo(-imageWidth, -imageHeight);
-      this._ctx.lineTo(-imageWidth / 2, imageHeight / 2);
+      this._ctx.moveTo(imageHalfWidth, imageHalfHeight);
+      this._ctx.lineTo(this._image.naturalWidth, this._image.naturalHeight);
+      this._ctx.lineTo(this._image.naturalWidth, -this._image.naturalHeight);
+      this._ctx.lineTo(-this._image.naturalWidth, -this._image.naturalHeight);
+      this._ctx.lineTo(-imageHalfWidth, imageHalfHeight);
 
       this._ctx.moveTo(
-          (rectSide / 2) - strokeWidth / 2,
-          (rectSide / 2) - strokeWidth / 2);
-      this._ctx.lineTo(rectSide / 2 - strokeWidth / 2, rectSide / 2 - strokeWidth);
-      this._ctx.lineTo(rectSide / 2 - strokeWidth / 2, -rectSide / 2 - strokeWidth);
-      this._ctx.lineTo(-rectSide / 2 - strokeWidth, -rectSide / 2 - strokeWidth);
-      this._ctx.lineTo(-rectSide / 2 - strokeWidth, rectSide / 2 - strokeWidth / 2);
+          rectHalfSide - strokeHalfWidth,
+          rectHalfSide - strokeHalfWidth);
+      this._ctx.lineTo(rectHalfSide - strokeHalfWidth, rectHalfSide - strokeWidth);
+      this._ctx.lineTo(rectHalfSide - strokeHalfWidth, -rectHalfSide - strokeWidth);
+      this._ctx.lineTo(-rectHalfSide - strokeWidth, -rectHalfSide - strokeWidth);
+      this._ctx.lineTo(-rectHalfSide - strokeWidth, rectHalfSide - strokeHalfWidth);
       this._ctx.closePath();
       this._ctx.fill('evenodd');
       this._ctx.fillStyle = '#fff';
       this._ctx.textBaseline = 'hanging';
       this._ctx.textAlign = 'center';
       this._ctx.font = fontSize + 'pt' + ' Arial';
-      this._ctx.fillText(imageWidth + ' x ' + imageHeight, 0, (-rectSide / 2) - strokeWidth - lineHeight);
+      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, -rectHalfSide - strokeWidth - lineHeight);
 
       /*********************************/
       // Восстановление состояния канваса, которое было до вызова ctx.save
