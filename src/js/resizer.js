@@ -158,37 +158,29 @@
       this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, -rectHalfSide - strokeWidth - lineHeight);
 
       /*********************************/
-       
       var dotRadius = 6;
       var dotDiameter = 2 * dotRadius;
       var dotShift = 2;
-      var originX = -imageHalfWidth;
-      var originY = -imageHalfHeight;
-      
       this._ctx.fillStyle = '#ffe753';
       this._ctx.closePath();
       for(var i = 0; i < (rectSide / (dotDiameter + dotShift)); i++) {
-         this._ctx.beginPath();
-         this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), -rectHalfSide, dotRadius, 0, Math.PI*2, false);
-         this._ctx.closePath();
-         this._ctx.fill();
-         
-         this._ctx.beginPath();
-         this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), rectHalfSide, dotRadius, 0, Math.PI*2, false);
-         this._ctx.closePath();
-         this._ctx.fill();
-         
-         this._ctx.beginPath();
-         this._ctx.arc(-rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI*2, false);
-         this._ctx.closePath();
-         this._ctx.fill();
-         
-         this._ctx.beginPath();
-         this._ctx.arc(rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI*2, false);
-         this._ctx.closePath();
-         this._ctx.fill();
-      }       
-       
+        this._ctx.beginPath();
+        this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), -rectHalfSide, dotRadius, 0, Math.PI * 2, false);
+        this._ctx.closePath();
+        this._ctx.fill();
+        this._ctx.beginPath();
+        this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), rectHalfSide, dotRadius, 0, Math.PI * 2, false);
+        this._ctx.closePath();
+        this._ctx.fill();
+        this._ctx.beginPath();
+        this._ctx.arc(-rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI * 2, false);
+        this._ctx.closePath();
+        this._ctx.fill();
+        this._ctx.beginPath();
+        this._ctx.arc(rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI * 2, false);
+        this._ctx.closePath();
+        this._ctx.fill();
+      }
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
       // следующий кадр рисовался с привычной системой координат, где точка
