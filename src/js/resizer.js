@@ -92,11 +92,6 @@
       this._ctx.lineWidth = 6;
       // Цвет обводки.
       this._ctx.strokeStyle = '#ffe753';
-      // Размер штрихов. Первый элемент массива задает длину штриха, второй
-      // расстояние между соседними штрихами.
-      this._ctx.setLineDash([15, 10]);
-      // Смещение первого штриха от начала линии.
-      this._ctx.lineDashOffset = 7;
 
       // Сохранение состояния канваса.
       this._ctx.save();
@@ -158,29 +153,67 @@
       this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, -rectHalfSide - strokeWidth - lineHeight);
 
       /*********************************/
-      var dotRadius = 6;
-      var dotDiameter = 2 * dotRadius;
-      var dotShift = 2;
-      this._ctx.fillStyle = '#ffe753';
-      this._ctx.closePath();
-      for(var i = 0; i < (rectSide / (dotDiameter + dotShift)); i++) {
-        this._ctx.beginPath();
-        this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), -rectHalfSide, dotRadius, 0, Math.PI * 2, false);
-        this._ctx.closePath();
-        this._ctx.fill();
-        this._ctx.beginPath();
-        this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), rectHalfSide, dotRadius, 0, Math.PI * 2, false);
-        this._ctx.closePath();
-        this._ctx.fill();
-        this._ctx.beginPath();
-        this._ctx.arc(-rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI * 2, false);
-        this._ctx.closePath();
-        this._ctx.fill();
-        this._ctx.beginPath();
-        this._ctx.arc(rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI * 2, false);
-        this._ctx.closePath();
-        this._ctx.fill();
+//      var dotRadius = 6;
+//      var dotDiameter = 2 * dotRadius;
+//      var dotShift = 2;
+//      this._ctx.fillStyle = '#ffe753';
+//      this._ctx.closePath();
+//      for(var i = 0; i < (rectSide / (dotDiameter + dotShift)); i++) {
+//        this._ctx.beginPath();
+//        this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), -rectHalfSide, dotRadius, 0, Math.PI * 2, false);
+//        this._ctx.closePath();
+//        this._ctx.fill();
+//        this._ctx.beginPath();
+//        this._ctx.arc(-rectHalfSide + i * (dotDiameter + dotShift), rectHalfSide, dotRadius, 0, Math.PI * 2, false);
+//        this._ctx.closePath();
+//        this._ctx.fill();
+//        this._ctx.beginPath();
+//        this._ctx.arc(-rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI * 2, false);
+//        this._ctx.closePath();
+//        this._ctx.fill();
+//        this._ctx.beginPath();
+//        this._ctx.arc(rectHalfSide, -rectHalfSide + i * (dotDiameter + dotShift), dotRadius, 0, Math.PI * 2, false);
+//        this._ctx.closePath();
+//        this._ctx.fill();
+//      }
+      /*********************************/
+      var originCoord = rectHalfSide - strokeHalfWidth;
+      var sideWidth = 10;
+      var sideHeight = 10;
+      this._ctx.lineWidth = 4;
+      /****top****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(-originCoord - sideWidth, -originCoord);
+      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(-originCoord + (2 * i) * sideWidth, -originCoord - sideHeight);
+        this._ctx.lineTo(-originCoord + (2 * i + 1) * sideWidth, -originCoord);
+        this._ctx.stroke();
       }
+      /****bottom****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(originCoord, originCoord - sideHeight);
+      for(i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(originCoord - (2 * i + 1) * sideWidth, originCoord);
+        this._ctx.lineTo(originCoord - (2 * i + 2) * sideWidth, originCoord - sideHeight);
+        this._ctx.stroke();
+      }
+      /****right****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(originCoord - sideHeight, originCoord);
+      for(i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(originCoord, originCoord - (2 * i + 1) * sideWidth);
+        this._ctx.lineTo(originCoord - sideHeight, originCoord - (2 * i + 2) * sideWidth);
+        this._ctx.stroke();
+      }
+      /****left****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(-originCoord, -originCoord - sideWidth);
+      for(i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(-originCoord - sideHeight, -originCoord + (2 * i) * sideWidth);
+        this._ctx.lineTo(-originCoord, -originCoord + (2 * i + 1) * sideWidth);
+        this._ctx.stroke();
+      }
+      this._ctx.stroke();
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
       // следующий кадр рисовался с привычной системой координат, где точка
