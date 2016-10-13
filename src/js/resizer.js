@@ -181,44 +181,44 @@
 //        this._ctx.closePath();
 //        this._ctx.fill();
 //      }
-       /*********************************/
-         var originCoord = rectHalfSide - strokeHalfWidth;
-         var sideWidth = 10;
-         var sideHeight = 10;
-         this._ctx.lineWidth = 6;
-         /****top****/
-         this._ctx.beginPath();
-         this._ctx.moveTo(-originCoord, -originCoord);
-         for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
-            this._ctx.lineTo(-originCoord + (2 * i + 1) * sideWidth, -originCoord - sideHeight);
-            this._ctx.lineTo(-originCoord + (2 * i + 2) * sideWidth, -originCoord);
-            this._ctx.stroke();
-         }
-         /****bottom****/
-         this._ctx.beginPath();
-         this._ctx.moveTo(originCoord, originCoord);
-         for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
-            this._ctx.lineTo(originCoord - (2 * i + 1) * sideWidth, originCoord - sideHeight);
-            this._ctx.lineTo(originCoord - (2 * i + 2) * sideWidth, originCoord);
-            this._ctx.stroke();
-         }
-         /****right****/
-         this._ctx.beginPath();
-         this._ctx.moveTo(originCoord, originCoord);
-         for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
-            this._ctx.lineTo(originCoord + sideHeight, originCoord - (2 * i + 1) * sideWidth);
-            this._ctx.lineTo(originCoord, originCoord - (2 * i + 2) * sideWidth);
-            this._ctx.stroke();
-         }
-         /****left****/
-         this._ctx.beginPath();
-         this._ctx.moveTo(-originCoord, -originCoord);
-         for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
-            this._ctx.lineTo(-originCoord - sideHeight, -originCoord + (2 * i + 1) * sideWidth);
-            this._ctx.lineTo(-originCoord, -originCoord + (2 * i + 2) * sideWidth);
-            this._ctx.stroke();
-         }
-         this._ctx.stroke();
+      /*********************************/
+      var originCoord = rectHalfSide - strokeHalfWidth;
+      var sideWidth = 10;
+      var sideHeight = 10;
+      this._ctx.lineWidth = 6;
+      /****top****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(-originCoord, -originCoord);
+      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(-originCoord + (2 * i + 1) * sideWidth, -originCoord - sideHeight);
+        this._ctx.lineTo(-originCoord + (2 * i + 2) * sideWidth, -originCoord);
+        this._ctx.stroke();
+      }
+      /****bottom****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(originCoord, originCoord);
+      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(originCoord - (2 * i + 1) * sideWidth, originCoord - sideHeight);
+        this._ctx.lineTo(originCoord - (2 * i + 2) * sideWidth, originCoord);
+        this._ctx.stroke();
+      }
+      /****right****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(originCoord, originCoord);
+      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(originCoord + sideHeight, originCoord - (2 * i + 1) * sideWidth);
+        this._ctx.lineTo(originCoord, originCoord - (2 * i + 2) * sideWidth);
+        this._ctx.stroke();
+      }
+      /****left****/
+      this._ctx.beginPath();
+      this._ctx.moveTo(-originCoord, -originCoord);
+      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+        this._ctx.lineTo(-originCoord - sideHeight, -originCoord + (2 * i + 1) * sideWidth);
+        this._ctx.lineTo(-originCoord, -originCoord + (2 * i + 2) * sideWidth);
+        this._ctx.stroke();
+      }
+      this._ctx.stroke();
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
       // следующий кадр рисовался с привычной системой координат, где точка
