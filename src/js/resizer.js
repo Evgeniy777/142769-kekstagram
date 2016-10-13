@@ -197,7 +197,7 @@
       /****bottom****/
       this._ctx.beginPath();
       this._ctx.moveTo(originCoord, originCoord);
-      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+      for(i = 0; i < (rectHalfSide / sideWidth); i++) {
         this._ctx.lineTo(originCoord - (2 * i + 1) * sideWidth, originCoord - sideHeight);
         this._ctx.lineTo(originCoord - (2 * i + 2) * sideWidth, originCoord);
         this._ctx.stroke();
@@ -205,7 +205,7 @@
       /****right****/
       this._ctx.beginPath();
       this._ctx.moveTo(originCoord, originCoord);
-      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+      for(i = 0; i < (rectHalfSide / sideWidth); i++) {
         this._ctx.lineTo(originCoord + sideHeight, originCoord - (2 * i + 1) * sideWidth);
         this._ctx.lineTo(originCoord, originCoord - (2 * i + 2) * sideWidth);
         this._ctx.stroke();
@@ -213,7 +213,7 @@
       /****left****/
       this._ctx.beginPath();
       this._ctx.moveTo(-originCoord, -originCoord);
-      for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
+      for(i = 0; i < (rectHalfSide / sideWidth); i++) {
         this._ctx.lineTo(-originCoord - sideHeight, -originCoord + (2 * i + 1) * sideWidth);
         this._ctx.lineTo(-originCoord, -originCoord + (2 * i + 2) * sideWidth);
         this._ctx.stroke();
