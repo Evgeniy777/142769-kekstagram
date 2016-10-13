@@ -72,6 +72,11 @@
    * @return {boolean}
    */
   var resizeFormIsValid = function() {
+    
+    var resizeX = document.querySelector('resize-x');
+    var resizeY = document.querySelector('resize-y');
+    var resizeSize = document.querySelector('resize-size');
+     
     return true;
   };
 
