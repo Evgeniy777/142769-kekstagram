@@ -92,11 +92,6 @@
       this._ctx.lineWidth = 6;
       // Цвет обводки.
       this._ctx.strokeStyle = '#ffe753';
-      // Размер штрихов. Первый элемент массива задает длину штриха, второй
-      // расстояние между соседними штрихами.
-//      this._ctx.setLineDash([15, 10]);
-      // Смещение первого штриха от начала линии.
-//      this._ctx.lineDashOffset = 7;
 
       // Сохранение состояния канваса.
       this._ctx.save();
@@ -185,37 +180,37 @@
       var originCoord = rectHalfSide - strokeHalfWidth;
       var sideWidth = 10;
       var sideHeight = 10;
-      this._ctx.lineWidth = 6;
+      this._ctx.lineWidth = 4;
       /****top****/
       this._ctx.beginPath();
-      this._ctx.moveTo(-originCoord, -originCoord);
+      this._ctx.moveTo(-originCoord - sideWidth, -originCoord);
       for(var i = 0; i < (rectHalfSide / sideWidth); i++) {
-        this._ctx.lineTo(-originCoord + (2 * i + 1) * sideWidth, -originCoord - sideHeight);
-        this._ctx.lineTo(-originCoord + (2 * i + 2) * sideWidth, -originCoord);
+        this._ctx.lineTo(-originCoord + (2 * i + 1) * sideWidth - sideWidth, -originCoord - sideHeight);
+        this._ctx.lineTo(-originCoord + (2 * i + 2) * sideWidth - sideWidth, -originCoord);
         this._ctx.stroke();
       }
       /****bottom****/
       this._ctx.beginPath();
-      this._ctx.moveTo(originCoord, originCoord);
+      this._ctx.moveTo(originCoord, originCoord - sideHeight + sideWidth - sideHeight);
       for(i = 0; i < (rectHalfSide / sideWidth); i++) {
-        this._ctx.lineTo(originCoord - (2 * i + 1) * sideWidth, originCoord - sideHeight);
-        this._ctx.lineTo(originCoord - (2 * i + 2) * sideWidth, originCoord);
+        this._ctx.lineTo(originCoord - (2 * i + 1) * sideWidth, originCoord + sideWidth - sideHeight);
+        this._ctx.lineTo(originCoord - (2 * i + 2) * sideWidth, originCoord - sideHeight + sideWidth - sideHeight);
         this._ctx.stroke();
       }
       /****right****/
       this._ctx.beginPath();
-      this._ctx.moveTo(originCoord, originCoord);
+      this._ctx.moveTo(originCoord - sideWidth, originCoord);
       for(i = 0; i < (rectHalfSide / sideWidth); i++) {
-        this._ctx.lineTo(originCoord + sideHeight, originCoord - (2 * i + 1) * sideWidth);
-        this._ctx.lineTo(originCoord, originCoord - (2 * i + 2) * sideWidth);
+        this._ctx.lineTo(originCoord + sideHeight - sideWidth, originCoord - (2 * i + 1) * sideWidth);
+        this._ctx.lineTo(originCoord - sideWidth, originCoord - (2 * i + 2) * sideWidth);
         this._ctx.stroke();
       }
       /****left****/
       this._ctx.beginPath();
-      this._ctx.moveTo(-originCoord, -originCoord);
+      this._ctx.moveTo(-originCoord, -originCoord - sideWidth);
       for(i = 0; i < (rectHalfSide / sideWidth); i++) {
-        this._ctx.lineTo(-originCoord - sideHeight, -originCoord + (2 * i + 1) * sideWidth);
-        this._ctx.lineTo(-originCoord, -originCoord + (2 * i + 2) * sideWidth);
+        this._ctx.lineTo(-originCoord - sideHeight, -originCoord + (2 * i + 1) * sideWidth - sideWidth);
+        this._ctx.lineTo(-originCoord, -originCoord + (2 * i + 2) * sideWidth - sideWidth);
         this._ctx.stroke();
       }
       this._ctx.stroke();
