@@ -71,36 +71,43 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
-  var resizeForm = document.querySelector('#upload-resize');
-  var resizeSize = document.querySelector('#resize-size');
-  var inputs = resizeForm.getElementsByClassName('upload-resize-control');
+  
   var resizeX = document.querySelector('#resize-x');
   var resizeY = document.querySelector('#resize-y');
+  var resizeSize = document.querySelector('#resize-size');
   var sendButton = document.querySelector('#resize-fwd');
   resizeX.value = 0;
   resizeY.value = 0;
   resizeSize.value = 0;
-  var validationForm = function() {
-    if(resizeX.value < 0) {
-      console.log('<');
-      sendButton.setAttribute('disabled', 'disabled');
-    } else {
-      console.log('>');
-      sendButton.removeAttribute('disabled');
+  var resizeForm = document.querySelector('#upload-resize');
+  var inputs = resizeForm.getElementsByClassName('upload-resize-control');
+  
+  var validationForm = function(a,b,c,d) {
+    for(var i = 0; i < inputs.length; i++) {
+      inputs[i].oninput  = function() {
+
+        if((a && b && c && d)) {
+          console.log('--');
+          sendButton.setAttribute('disabled', 'disabled');
+        } else {
+          console.log('++');
+          sendButton.removeAttribute('disabled');
+        }
+      };
     }
   };
-  for(var i = 0; i < inputs.length; i++) {
-    inputs[i].oninput  = validationForm;
-  }
+  
+  validationForm();
   
   var resizeFormIsValid = function() {
-    
     var imageWidth = currentResizer._image.naturalWidth;
     var imageHeight = currentResizer._image.naturalHeight;
-    var conditionOne = !((resizeX.value + resizeY.value) > imageWidth);
-    var conditionTwo = !((resizeY.value + resizeSize.value) > imageHeight);
-    var conditionThree = !((resizeX.value < 0) && (resizeY.value < 0));
-    
+    var conditionOne = (resizeX.value + resizeY.value) > imageWidth;
+    var conditionTwo = (resizeY.value + resizeSize.value) > imageHeight;
+    var conditionThree = (resizeX.value < 0);
+    var conditionFour = (resizeY.value < 0);
+    console.log(conditionOne, conditionTwo, conditionThree, conditionFour);
+    validationForm(conditionOne, conditionTwo, conditionThree, conditionFour);
     return true;
   };
 
