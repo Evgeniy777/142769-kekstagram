@@ -208,6 +208,7 @@ body {
 
 .upload-form-controls-fwd:disabled {
   opacity: 0.5;
+  background-color: red;
 }
 
 .upload-resize canvas {
