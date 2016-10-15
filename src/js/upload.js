@@ -72,7 +72,7 @@
    * @return {boolean}
    */
   var cropForm = document.querySelector('#upload-resize');
-  var inputs = crop.getElementsByClassName('upload-resize-control');
+  var inputs = cropForm.getElementsByClassName('upload-resize-control');
   var validationForm = function() {
     var resizeX = document.querySelector('#resize-x');
     var resizeY = document.querySelector('#resize-y');
