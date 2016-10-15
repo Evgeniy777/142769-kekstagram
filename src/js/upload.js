@@ -71,8 +71,8 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
-  var resizeForm = document.querySelector('#upload-resize');
-  var inputs = resizeForm.getElementsByClassName('upload-resize-control');
+  var cropForm = document.querySelector('#upload-resize');
+  var inputs = crop.getElementsByClassName('upload-resize-control');
   var validationForm = function() {
     var resizeX = document.querySelector('#resize-x');
     var resizeY = document.querySelector('#resize-y');
@@ -82,7 +82,7 @@
     resizeY.value = 0;
     resizeSize.value = 0;
     for(var i = 0; i < inputs.length; i++) {
-      inputs[i].oninput  = function() {
+      inputs[i].oninput = function() {
         var imageWidth = currentResizer._image.naturalWidth;
         var imageHeight = currentResizer._image.naturalHeight;
         var conditionOne = (resizeX.value + resizeSize.value) < imageWidth;
@@ -101,9 +101,7 @@
       };
     }
   };
-  
   validationForm();
-  
   var resizeFormIsValid = function() {
     return true;
   };
