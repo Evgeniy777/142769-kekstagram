@@ -71,41 +71,38 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
-  var cropForm = document.querySelector('#upload-resize');
-  var inputs = cropForm.getElementsByClassName('upload-resize-control');
-  var validationForm = function() {
-    var resizeX = document.querySelector('#resize-x');
-    var resizeY = document.querySelector('#resize-y');
-    var resizeSize = document.querySelector('#resize-size');
-    var sendButton = document.querySelector('#resize-fwd');
-    resizeX.value = 0;
-    resizeY.value = 0;
-    resizeSize.value = 0;
-    for(var i = 0; i < inputs.length; i++) {
-      inputs[i].oninput = function() {
-        var imageWidth = currentResizer._image.naturalWidth;
-        var imageHeight = currentResizer._image.naturalHeight;
-        var conditionOne = (resizeX.value + resizeSize.value) < imageWidth;
-        var conditionTwo = (resizeY.value + resizeSize.value) < imageHeight;
-        var conditionThree = (resizeX.value >= 0);
-        var conditionFour = (resizeY.value >= 0);
-        var mainCondition = conditionOne && conditionTwo && conditionThree && conditionFour;
-        if(!mainCondition) {
-          console.log('--');
-          sendButton.setAttribute('disabled', 'disabled');
-        } else {
-          console.log('++');
-          sendButton.removeAttribute('disabled');
-        }
-        console.log(conditionOne, conditionTwo, conditionThree, conditionFour, imageWidth, imageHeight);
-      };
+  var inputs = document.querySelector('#upload-resize').getElementsByClassName('upload-resize-control');
+  var inputsLength = inputs.length;
+  var inputX = document.querySelector('#resize-x');
+  var inputY = document.querySelector('#resize-y');
+  var inputSize = document.querySelector('#resize-size');
+  var sendButton = document.querySelector('#resize-fwd');
+  inputX.value = 0;
+  inputY.value = 0;
+  inputSize.value = 0;
+  var checkCondition = function() {
+    if(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
+      ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) && 
+      ((inputX.value >= 0)) && 
+      ((inputY.value >= 0))) {
+      return true;
+    } else {
+      return false;
     }
   };
-  validationForm();
   var resizeFormIsValid = function() {
+    for(var i = 0; i < inputsLength; i++) {
+      inputs[i].oninput = function() {
+        if(!checkCondition()) {
+          sendButton.setAttribute('disabled', 'disabled');
+        } else {
+          sendButton.removeAttribute('disabled');
+        }
+      };
+    }
     return true;
   };
-
+  resizeFormIsValid();
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
