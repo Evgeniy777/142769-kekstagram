@@ -82,8 +82,8 @@
   inputSize.value = 0;
   var checkCondition = function() {
     if(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
-      ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) && 
-      ((inputX.value >= 0)) && 
+      ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) &&
+      ((inputX.value >= 0)) &&
       ((inputY.value >= 0))) {
       return true;
     } else {
