@@ -89,17 +89,20 @@
     } else {
       return true;
     }
-  }; 
-  for(var i = 0; i < inputsLength; i++) {
-    inputs[i].oninput = function() {
-      resizeFormIsValid();
-      if(resizeFormIsValid()) {
-        sendButton.removeAttribute('disabled');
-      } else {
-        sendButton.setAttribute('disabled', 'disabled');
-      }
-    };
-  }
+  };
+  var setBtnDisabled = function() {
+    for(var i = 0; i < inputsLength; i++) {
+      inputs[i].oninput = function() {
+        resizeFormIsValid();
+        if(resizeFormIsValid()) {
+          sendButton.removeAttribute('disabled');
+        } else {
+          sendButton.setAttribute('disabled', 'disabled');
+        }
+      };
+    }
+  };
+  setBtnDisabled();
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
