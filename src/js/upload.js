@@ -81,22 +81,25 @@
   inputY.value = 0;
   inputSize.value = 0;
   var resizeFormIsValid = function() {
-    for(var i = 0; i < inputsLength; i++) {
-      inputs[i].oninput = function() {
-        if(!(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
-          ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) &&
-          ((inputX.value >= 0)) &&
-          ((inputY.value >= 0)))) {
-          sendButton.setAttribute('disabled', 'disabled');
-          return false;
-        } else {
-          sendButton.removeAttribute('disabled');
-          return true;
-        }
-      };
+    if(!(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
+      ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) &&
+      ((inputX.value >= 0)) &&
+      ((inputY.value >= 0)))) {
+      return false;
+    } else {
+      return true;
     }
-  };
-  resizeFormIsValid();
+  }; 
+  for(var i = 0; i < inputsLength; i++) {
+    inputs[i].oninput = function() {
+      resizeFormIsValid();
+      if(resizeFormIsValid()) {
+        sendButton.removeAttribute('disabled');
+      } else {
+        sendButton.setAttribute('disabled', 'disabled');
+      }
+    };
+  }
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
