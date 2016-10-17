@@ -80,27 +80,21 @@
   inputX.value = 0;
   inputY.value = 0;
   inputSize.value = 0;
-  var checkCondition = function() {
-    if(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
-      ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) &&
-      ((inputX.value >= 0)) &&
-      ((inputY.value >= 0))) {
-      return true;
-    } else {
-      return false;
-    }
-  };
   var resizeFormIsValid = function() {
     for(var i = 0; i < inputsLength; i++) {
       inputs[i].oninput = function() {
-        if(!checkCondition()) {
+        if(!(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
+          ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) &&
+          ((inputX.value >= 0)) &&
+          ((inputY.value >= 0)))) {
           sendButton.setAttribute('disabled', 'disabled');
+          return false;
         } else {
           sendButton.removeAttribute('disabled');
+          return true;
         }
       };
     }
-    return true;
   };
   resizeFormIsValid();
   /**
