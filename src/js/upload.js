@@ -90,7 +90,7 @@
       return true;
     }
   };
-  var setBtnDisabled = function() {
+  var addHandlers = function() {
     for(var i = 0; i < inputsLength; i++) {
       inputs[i].oninput = function() {
         resizeFormIsValid();
@@ -102,7 +102,7 @@
       };
     }
   };
-  setBtnDisabled();
+  addHandlers();
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
