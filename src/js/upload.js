@@ -71,10 +71,38 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
+  var inputs = document.querySelector('#upload-resize').getElementsByClassName('upload-resize-control');
+  var inputsLength = inputs.length;
+  var inputX = document.querySelector('#resize-x');
+  var inputY = document.querySelector('#resize-y');
+  var inputSize = document.querySelector('#resize-size');
+  var sendButton = document.querySelector('#resize-fwd');
+  inputX.value = 0;
+  inputY.value = 0;
+  inputSize.value = 0;
   var resizeFormIsValid = function() {
-    return true;
+    if(!(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
+      ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) &&
+      ((inputX.value >= 0)) &&
+      ((inputY.value >= 0)))) {
+      return false;
+    } else {
+      return true;
+    }
   };
-
+  var addHandlers = function() {
+    for(var i = 0; i < inputsLength; i++) {
+      inputs[i].oninput = function() {
+        resizeFormIsValid();
+        if(resizeFormIsValid()) {
+          sendButton.removeAttribute('disabled');
+        } else {
+          sendButton.setAttribute('disabled', 'disabled');
+        }
+      };
+    }
+  };
+  addHandlers();
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
