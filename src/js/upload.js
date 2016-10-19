@@ -257,6 +257,22 @@
 
     cleanupResizer();
     updateBackground();
+    
+    var dayOfGraceBirth = new Date('1906-12-02');
+    var toDay = new Date();
+    var cookieLifeTime = 0;
+    var lastGraceBirthday = 0;
+    if(toDay.getMonth() > dayOfGraceBirth.getMonth() && toDay.getDate() > dayOfGraceBirth.getDate()) {
+      
+    } else {      
+      lastGraceBirthday = new Date(toDay.getFullYear() - 1, dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
+      cookieLifeTime = (new Date(toDay.valueOf() + (toDay - lastGraceBirthday))).toUTCString();
+    }
+    var filterForm = document.getElementById('upload-filter');
+    var lastSelectedFilterName = filterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
+    document.cookie = 'upload-filter=' + lastSelectedFilterName.toString() +';expires=' + cookieLifeTime;
+    console.log(document.cookie);
+      
 
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
