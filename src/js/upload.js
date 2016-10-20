@@ -257,14 +257,13 @@
 
     cleanupResizer();
     updateBackground();
-    
     var dayOfGraceBirth = new Date('1906-12-02');
     var toDay = new Date();
     var cookieLifeTime = 0;
     var lastGraceBirthday = 0;
     var filterCookie = '';
-    var filterForm = document.getElementById('upload-filter');
-    var lastSelectedFilterName = filterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
+    var uploadFilterForm = document.getElementById('upload-filter');
+    var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
     var filterFromCookie = '';
     if(toDay < (new Date(toDay.getFullYear(), dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate()))) {
       lastGraceBirthday = new Date(toDay.getFullYear() - 1, dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
@@ -277,8 +276,7 @@
     console.log(document.cookie);
     filterFromCookie = Cookies.get('upload-filter');
     console.log(filterFromCookie);
-    filterForm.querySelector('input[value=' + filterFromCookie + ']').setAttribute('checked', 'checked');
-    
+    uploadFilterForm.querySelector('input[value=' + filterFromCookie + ']').setAttribute('checked', 'checked');
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
