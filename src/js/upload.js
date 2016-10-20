@@ -265,6 +265,7 @@
     var filterCookie = '';
     var filterForm = document.getElementById('upload-filter');
     var lastSelectedFilterName = filterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
+    var filterFromCookie = '';
     if(toDay < (new Date(toDay.getFullYear(), dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate()))) {
       lastGraceBirthday = new Date(toDay.getFullYear() - 1, dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
     } else {
@@ -274,7 +275,9 @@
     filterCookie = 'upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime;
     document.cookie = filterCookie;
     console.log(document.cookie);
-    filterForm.querySelector('input[value=' + lastSelectedFilterName + ']').setAttribute('checked', 'checked');
+    filterFromCookie = Cookies.get('upload-filter');
+    console.log(filterFromCookie);
+    filterForm.querySelector('input[value=' + filterFromCookie + ']').setAttribute('checked', 'checked');
     
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
