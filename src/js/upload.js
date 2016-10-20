@@ -262,18 +262,20 @@
     var toDay = new Date();
     var cookieLifeTime = 0;
     var lastGraceBirthday = 0;
-    if(toDay.getMonth() > dayOfGraceBirth.getMonth() && toDay.getDate() > dayOfGraceBirth.getDate()) {
-      
-    } else {      
-      lastGraceBirthday = new Date(toDay.getFullYear() - 1, dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
-      cookieLifeTime = (new Date(toDay.valueOf() + (toDay - lastGraceBirthday))).toUTCString();
-    }
+    var filterCookie = '';
     var filterForm = document.getElementById('upload-filter');
     var lastSelectedFilterName = filterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
-    document.cookie = 'upload-filter=' + lastSelectedFilterName.toString() +';expires=' + cookieLifeTime;
+    if(toDay < (new Date(toDay.getFullYear(), dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate()))) {
+      lastGraceBirthday = new Date(toDay.getFullYear() - 1, dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
+    } else {
+      lastGraceBirthday = new Date(toDay.getFullYear(), dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
+    }
+    cookieLifeTime = (new Date(toDay.valueOf() + (toDay - lastGraceBirthday))).toUTCString();
+    filterCookie = 'upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime;
+    document.cookie = filterCookie;
     console.log(document.cookie);
-      
-
+    filterForm.querySelector('input[value=' + lastSelectedFilterName + ']').setAttribute('checked', 'checked');
+    
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
