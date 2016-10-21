@@ -263,7 +263,6 @@
     var today = new Date();
     var cookieLifeTime = 0;
     var lastGraceBirthday = 0;
-//    var filterCookie = '';
     var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
     if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
       lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
