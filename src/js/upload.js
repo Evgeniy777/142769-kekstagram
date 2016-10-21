@@ -266,13 +266,16 @@
       } else {
         lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
       }
+      return lastGraceBirthday;
+    }
+    function getLastSelectedFilter() {
+      return uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
     }
     function getExpireDate() {
-      cookieLifeTime = Math.floor((getLastGraceBirthday() / (1000 * 60 * 60 * 24)));
+      return Math.floor((getLastGraceBirthday() / (1000 * 60 * 60 * 24)));
     }
     function setCookie() {
-      var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
-      window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: getExpireDate() });
+      window.Cookies.set('upload-filter', getLastSelectedFilter(), { expires: getExpireDate() });
     }
     setCookie();
     filterForm.classList.add('invisible');
