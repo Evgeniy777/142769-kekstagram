@@ -252,7 +252,6 @@
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
-  
   var uploadFilterForm = document.getElementById('upload-filter');
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
@@ -276,14 +275,14 @@
     document.cookie = filterCookie;
     filterFromCookie = Cookies.get('upload-filter');
     console.log(filterFromCookie);
-    
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-  var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
-  uploadedFilter.setAttribute('checked', 'checked');
-  console.log(uploadedFilter);
-  
+  if(Cookies.get('upload-filter').length > 0) {
+    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
+    uploadedFilter.setAttribute('checked', 'checked');
+    console.log(uploadedFilter);
+  }
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
@@ -299,14 +298,12 @@
         'sepia': 'filter-sepia',
         'marvin': 'filter-marvin'
       };
-    }    
+    }
     
     var selectedFilter = [].filter.call(filterForm['upload-filter'], function(item) {
       return item.checked;
     })[0].value;
     
-    
-
     // Класс перезаписывается, а не обновляется через classList потому что нужно
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
