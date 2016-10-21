@@ -252,7 +252,6 @@
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
-  var Cookies = '';
   var uploadFilterForm = document.getElementById('upload-filter');
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
@@ -270,15 +269,15 @@
       lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
     }
     cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
-    Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
+    window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-  if(Cookies.get('upload-filter').length > 0) {
+  if(window.Cookies.get('upload-filter').length > 0) {
     uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
-    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
+    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter') + ']');
     uploadedFilter.setAttribute('checked', 'checked');
-    filterImage.className = 'filter-image-preview filter-' + Cookies.get('upload-filter');
+    filterImage.className = 'filter-image-preview filter-' + window.Cookies.get('upload-filter');
   }
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
