@@ -259,30 +259,36 @@
     cleanupResizer();
     updateBackground();
     var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
-    function setCookie() {
-      var graceBirthday = new Date('1906-12-02');
-      var today = new Date();
-      var cookieLifeTime = 0;
-      var lastGraceBirthday = 0;
+    var graceBirthday = new Date('1906-12-02');
+    var today = new Date();
+    var lastGraceBirthday = 0;
+    var cookieLifeTime = 0;
+    function getLastGraceBirthday() {
       if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
         lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
       } else {
         lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
       }
+    }
+    function setCookie() {
       cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
       window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
     }
+    getLastGraceBirthday();
     setCookie();
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-  var stored = window.Cookies.get('upload-filter');
-  if(stored && stored.length > 0) {
-    uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
-    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + stored + ']');
-    uploadedFilter.setAttribute('checked', 'checked');
-    filterImage.className = 'filter-image-preview filter-' + window.Cookies.get('upload-filter');
+  function restoredFromCookie() {
+    var stored = window.Cookies.get('upload-filter');
+    if(stored && stored.length > 0) {
+      uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
+      var uploadedFilter = uploadFilterForm.querySelector('input[value=' + stored + ']');
+      uploadedFilter.setAttribute('checked', 'checked');
+      filterImage.className = 'filter-image-preview filter-' + window.Cookies.get('upload-filter');
+    }
   }
+  restoredFromCookie();
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
