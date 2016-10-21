@@ -273,8 +273,6 @@
     cookieLifeTime = (new Date(today.valueOf() + (today - lastGraceBirthday))).toUTCString();
     filterCookie = 'upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime;
     document.cookie = filterCookie;
-    filterFromCookie = Cookies.get('upload-filter');
-    console.log(filterFromCookie);
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
