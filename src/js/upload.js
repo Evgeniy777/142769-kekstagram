@@ -252,35 +252,38 @@
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
+  
+  var uploadFilterForm = document.getElementById('upload-filter');
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
 
     cleanupResizer();
     updateBackground();
-    var dayOfGraceBirth = new Date('1906-12-02');
-    var toDay = new Date();
+    var graceBirthday = new Date('1906-12-02');
+    var today = new Date();
     var cookieLifeTime = 0;
     var lastGraceBirthday = 0;
     var filterCookie = '';
-    var uploadFilterForm = document.getElementById('upload-filter');
-    var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
     var filterFromCookie = '';
-    if(toDay < (new Date(toDay.getFullYear(), dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate()))) {
-      lastGraceBirthday = new Date(toDay.getFullYear() - 1, dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
+    var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
+    if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
+      lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
     } else {
-      lastGraceBirthday = new Date(toDay.getFullYear(), dayOfGraceBirth.getMonth(), dayOfGraceBirth.getDate());
+      lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
     }
-    cookieLifeTime = (new Date(toDay.valueOf() + (toDay - lastGraceBirthday))).toUTCString();
+    cookieLifeTime = (new Date(today.valueOf() + (today - lastGraceBirthday))).toUTCString();
     filterCookie = 'upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime;
     document.cookie = filterCookie;
-    console.log(document.cookie);
     filterFromCookie = Cookies.get('upload-filter');
     console.log(filterFromCookie);
-    uploadFilterForm.querySelector('input[value=' + filterFromCookie + ']').setAttribute('checked', 'checked');
+    
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-
+  var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
+  uploadedFilter.setAttribute('checked', 'checked');
+  console.log(uploadedFilter);
+  
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
@@ -296,16 +299,19 @@
         'sepia': 'filter-sepia',
         'marvin': 'filter-marvin'
       };
-    }
-
+    }    
+    
     var selectedFilter = [].filter.call(filterForm['upload-filter'], function(item) {
       return item.checked;
     })[0].value;
+    
+    
 
     // Класс перезаписывается, а не обновляется через classList потому что нужно
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
+    console.log(filterMap[selectedFilter]);
   };
 
   cleanupResizer();
