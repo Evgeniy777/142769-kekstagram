@@ -275,7 +275,7 @@
   };
   if(window.Cookies.get('upload-filter').length > 0) {
     uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
-    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter') + ']');
+    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + window.Cookies.get('upload-filter') + ']');
     uploadedFilter.setAttribute('checked', 'checked');
     filterImage.className = 'filter-image-preview filter-' + window.Cookies.get('upload-filter');
   }
