@@ -275,6 +275,7 @@
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
+  var Cookies;
   if(Cookies.get('upload-filter').length > 0) {
     var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
     uploadedFilter.setAttribute('checked', 'checked');
