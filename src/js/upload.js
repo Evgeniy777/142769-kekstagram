@@ -253,7 +253,6 @@
    * @param {Event} evt
    */
   var uploadFilterForm = document.getElementById('upload-filter');
-  var cookies2 = Cookies.noConflict();
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
 
@@ -270,10 +269,10 @@
       lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
     }
     cookieLifeTime = (new Date(today.valueOf() + (today - lastGraceBirthday))).toUTCString();
-    cookies2.set('upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime);
-    if(cookies2.get('upload-filter').length > 0) {
+    Cookies.set('upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime);
+    if(Cookies.get('upload-filter').length > 0) {
       uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
-      var uploadedFilter = uploadFilterForm.querySelector('input[value=' + cookies2.get('upload-filter').toString() + ']');
+      var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
       uploadedFilter.setAttribute('checked', 'checked');
     }
     filterForm.classList.add('invisible');
