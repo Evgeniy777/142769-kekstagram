@@ -252,6 +252,7 @@
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
+  var Cookies = '';
   var uploadFilterForm = document.getElementById('upload-filter');
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
@@ -277,6 +278,7 @@
     uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
     var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
     uploadedFilter.setAttribute('checked', 'checked');
+    filterImage.className = 'filter-image-preview filter-' + Cookies.get('upload-filter');
   }
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
