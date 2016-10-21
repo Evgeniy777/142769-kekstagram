@@ -262,11 +262,10 @@
       var graceBirthday = new Date('1906-12-02');
       var today = new Date();
       if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
-        lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
+        return new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
       } else {
-        lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
+        return new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
       }
-      return lastGraceBirthday;
     }
     function getLastSelectedFilter() {
       return uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
