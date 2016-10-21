@@ -270,14 +270,14 @@
     }
     cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
     Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
-    if(Cookies.get('upload-filter').length > 0) {
-      uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
-      var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
-      uploadedFilter.setAttribute('checked', 'checked');
-    }
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
+  if(Cookies.get('upload-filter').length > 0) {
+    uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
+    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
+    uploadedFilter.setAttribute('checked', 'checked');
+  }
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
