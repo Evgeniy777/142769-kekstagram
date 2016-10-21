@@ -258,7 +258,6 @@
 
     cleanupResizer();
     updateBackground();
-    
     var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
     function setCookie() {
       var graceBirthday = new Date('1906-12-02');
@@ -272,7 +271,7 @@
       }
       cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
       window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
-    };
+    }
     setCookie();
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
