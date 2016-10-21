@@ -252,7 +252,7 @@
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
-  var Cookies;
+  var Cookies = '';
   var uploadFilterForm = document.getElementById('upload-filter');
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
