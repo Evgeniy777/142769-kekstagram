@@ -270,10 +270,7 @@
       lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
     }
     cookieLifeTime = (new Date(today.valueOf() + (today - lastGraceBirthday))).toUTCString();
-//    filterCookie = 'upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime;
     cookies2.set('upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime);
-//    console.log(lastSelectedFilterName);
-//    document.cookie = filterCookie;
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
@@ -281,7 +278,6 @@
     uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
     var uploadedFilter = uploadFilterForm.querySelector('input[value=' + cookies2.get('upload-filter').toString() + ']');
     uploadedFilter.setAttribute('checked', 'checked');
-//    console.log(uploadedFilter);
   }
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
@@ -306,7 +302,6 @@
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
-    console.log(filterMap[selectedFilter]);
   };
 
   cleanupResizer();
