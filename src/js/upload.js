@@ -268,8 +268,8 @@
     } else {
       lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
     }
-    cookieLifeTime = (new Date(today.valueOf() + (today - lastGraceBirthday))).toUTCString();
-    Cookies.set('upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime);
+    cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
+    Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
     if(Cookies.get('upload-filter').length > 0) {
       uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
       var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
