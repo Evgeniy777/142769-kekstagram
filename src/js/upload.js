@@ -253,6 +253,7 @@
    * @param {Event} evt
    */
   var uploadFilterForm = document.getElementById('upload-filter');
+  var cookies2 = Cookies.noConflict();
   filterForm.onsubmit = function(evt) {
     evt.preventDefault();
 
@@ -262,7 +263,7 @@
     var today = new Date();
     var cookieLifeTime = 0;
     var lastGraceBirthday = 0;
-    var filterCookie = '';
+//    var filterCookie = '';
     var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
     if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
       lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
@@ -270,16 +271,18 @@
       lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
     }
     cookieLifeTime = (new Date(today.valueOf() + (today - lastGraceBirthday))).toUTCString();
-    filterCookie = 'upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime;
-    document.cookie = filterCookie;
+//    filterCookie = 'upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime;
+    cookies2.set('upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime);
+//    console.log(lastSelectedFilterName);
+//    document.cookie = filterCookie;
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-  var Cookies;
-  if(Cookies.get('upload-filter').length > 0) {
-    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + Cookies.get('upload-filter').toString() + ']');
+  if(cookies2.get('upload-filter').length > 0) {
+    uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
+    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + cookies2.get('upload-filter').toString() + ']');
     uploadedFilter.setAttribute('checked', 'checked');
-    console.log(uploadedFilter);
+//    console.log(uploadedFilter);
   }
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
