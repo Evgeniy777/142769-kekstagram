@@ -258,24 +258,29 @@
 
     cleanupResizer();
     updateBackground();
-    var graceBirthday = new Date('1906-12-02');
-    var today = new Date();
-    var cookieLifeTime = 0;
-    var lastGraceBirthday = 0;
+    
     var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
-    if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
-      lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
-    } else {
-      lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
-    }
-    cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
-    window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
+    function setCookie() {
+      var graceBirthday = new Date('1906-12-02');
+      var today = new Date();
+      var cookieLifeTime = 0;
+      var lastGraceBirthday = 0;
+      if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
+        lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
+      } else {
+        lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
+      }
+      cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
+      window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
+    };
+    setCookie();
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-  if(window.Cookies.get('upload-filter').length > 0) {
+  var stored = window.Cookies.get('upload-filter');
+  if(stored && stored.length > 0) {
     uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
-    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + window.Cookies.get('upload-filter') + ']');
+    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + stored + ']');
     uploadedFilter.setAttribute('checked', 'checked');
     filterImage.className = 'filter-image-preview filter-' + window.Cookies.get('upload-filter');
   }
