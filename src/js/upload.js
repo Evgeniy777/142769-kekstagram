@@ -271,14 +271,14 @@
     }
     cookieLifeTime = (new Date(today.valueOf() + (today - lastGraceBirthday))).toUTCString();
     cookies2.set('upload-filter=' + lastSelectedFilterName + '; path=/; expires=' + cookieLifeTime);
+    if(cookies2.get('upload-filter').length > 0) {
+      uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
+      var uploadedFilter = uploadFilterForm.querySelector('input[value=' + cookies2.get('upload-filter').toString() + ']');
+      uploadedFilter.setAttribute('checked', 'checked');
+    }
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-  if(cookies2.get('upload-filter').length > 0) {
-    uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
-    var uploadedFilter = uploadFilterForm.querySelector('input[value=' + cookies2.get('upload-filter').toString() + ']');
-    uploadedFilter.setAttribute('checked', 'checked');
-  }
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
@@ -302,6 +302,7 @@
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
+    console.log(selectedFilter);
   };
 
   cleanupResizer();
