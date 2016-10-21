@@ -261,7 +261,6 @@
     function getLastGraceBirthday() {
       var graceBirthday = new Date('1906-12-02');
       var today = new Date();
-      var lastGraceBirthday = 0;
       if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
         lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
       } else {
@@ -269,7 +268,6 @@
       }
     }
     function getExpireDate() {
-      var cookieLifeTime = 0;
       cookieLifeTime = Math.floor((getLastGraceBirthday() / (1000 * 60 * 60 * 24)));
     }
     function setCookie() {
