@@ -258,23 +258,24 @@
 
     cleanupResizer();
     updateBackground();
-    var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
-    var graceBirthday = new Date('1906-12-02');
-    var today = new Date();
-    var lastGraceBirthday = 0;
-    var cookieLifeTime = 0;
     function getLastGraceBirthday() {
+      var graceBirthday = new Date('1906-12-02');
+      var today = new Date();
+      var lastGraceBirthday = 0;
       if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
         lastGraceBirthday = new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
       } else {
         lastGraceBirthday = new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
       }
     }
-    function setCookie() {
-      cookieLifeTime = Math.floor(((today - lastGraceBirthday) / (1000 * 60 * 60 * 24)));
-      window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: cookieLifeTime });
+    function getExpireDate() {
+      var cookieLifeTime = 0;
+      cookieLifeTime = Math.floor((getLastGraceBirthday() / (1000 * 60 * 60 * 24)));
     }
-    getLastGraceBirthday();
+    function setCookie() {
+      var lastSelectedFilterName = uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
+      window.Cookies.set('upload-filter', lastSelectedFilterName, { expires: getExpireDate() });
+    }
     setCookie();
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
