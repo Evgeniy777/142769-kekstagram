@@ -26,7 +26,6 @@ var load = function (url, callback, callbackName) {
 
 var hideFilters = function () {
   document.querySelector('.filters').classList.add('hidden');
-  return pictures;
 };
 
 var getPictureElement = function (picture) {
@@ -56,14 +55,16 @@ var showFilters = function () {
   document.querySelector('.filters').classList.remove('hidden');
 };
 
-var renderPictures = function () {
+var renderPictures = function (callback) {
   hideFilters();
   pictures.forEach(function (picture) {
     container.appendChild(getPictureElement(picture));
   });
   showFilters();
+  
+  if (typeof callback === 'function') {
+    callback();
+  }
 };
-
-//renderPictures(showFilters);
 
 load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
