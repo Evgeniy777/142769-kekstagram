@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 module.exports = function() {
   (function() {
     var load = require('./load');
