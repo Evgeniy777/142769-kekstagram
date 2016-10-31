@@ -1,3 +1,4 @@
+'use strict';
 var load = function(url, callback, callbackName) {
   if (!callbackName) {
     callbackName = 'cb' + Date.now();

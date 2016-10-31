@@ -1,3 +1,4 @@
+'use strict';
 var getPictureElement = function(picture) {
   var template = document.querySelector('#picture-template');
   var templateContainer = 'content' in template ? template.content : template;
