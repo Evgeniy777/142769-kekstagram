@@ -1,7 +1,6 @@
 'use strict';
 module.exports = function() {
   (function() {
-    var pictures = [];
     var load = require('./load');
     var getPictureElement = require('./picture');
     var container = document.querySelector('.pictures.container');
