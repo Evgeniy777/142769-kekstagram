@@ -5,6 +5,7 @@ var load = function(url, callback, callbackName) {
   }
 
   window[callbackName] = function(data) {
+    var pictures = [];
     pictures = data;
     callback(data);
   };
