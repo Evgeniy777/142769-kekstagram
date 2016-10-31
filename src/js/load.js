@@ -1,9 +1,9 @@
-var load = function (url, callback, callbackName) {
+var load = function(url, callback, callbackName) {
   if (!callbackName) {
     callbackName = 'cb' + Date.now();
   }
 
-  window[callbackName] = function (data) {
+  window[callbackName] = function(data) {
     pictures = data;
     callback(data);
   };
