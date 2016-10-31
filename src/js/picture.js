@@ -2,6 +2,7 @@
 var getPictureElement = function(picture) {
   var template = document.querySelector('#picture-template');
   var templateContainer = 'content' in template ? template.content : template;
+  var pictures = [];
   var IMG_WIDTH = 182;
   var IMG_HEIGHT = 182;
   var IMAGE_LOAD_TIMEOUT = 10000;
