@@ -4,7 +4,7 @@ var load = function(url, callback, callbackName) {
     callbackName = 'cb' + Date.now();
   }
 
-  window[callbackName] = function(data) 
+  window[callbackName] = function(data) {
     var pictures = [];
     pictures = data;
     callback(data);
