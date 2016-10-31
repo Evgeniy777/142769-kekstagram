@@ -3,6 +3,7 @@ module.exports = function() {
   (function() {
     var load = require('./load');
     var getPictureElement = require('./picture');
+    var pictures = [];
     var container = document.querySelector('.pictures.container');
     var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
 
