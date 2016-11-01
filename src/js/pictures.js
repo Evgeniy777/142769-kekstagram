@@ -20,10 +20,6 @@ module.exports = function() {
         container.appendChild(getPictureElement(picture));
       });
       showFilters();
-
-      if (typeof callback === 'function') {
-        callback();
-      }
     };
 
     load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
