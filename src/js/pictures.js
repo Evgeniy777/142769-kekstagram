@@ -14,7 +14,7 @@ module.exports = function() {
       document.querySelector('.filters').classList.remove('hidden');
     };
 
-    var renderPictures = function(callback) {
+    var renderPictures = function(pictures) {
       hideFilters();
       pictures.forEach(function(picture) {
         container.appendChild(getPictureElement(picture));
