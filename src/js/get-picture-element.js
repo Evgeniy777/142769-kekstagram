@@ -1,5 +1,7 @@
 'use strict';
-var getPictureElement = function(picture) {
+
+var getPictureElement = function(picture, num) {
+  var gallery = require('./gallery');
   var template = document.querySelector('#picture-template');
   var templateContainer = 'content' in template ? template.content : template;
   var IMG_WIDTH = 182;
@@ -13,7 +15,7 @@ var getPictureElement = function(picture) {
   var imageTimeout = null;
   image.onload = function() {
     clearTimeout(imageTimeout);
-    pictureElement.querySelector('img').src = picture.url;
+    pictureElement.querySelector('img').src = picture.url || picture.preview;
     pictureElement.querySelector('img').width = IMG_WIDTH;
     pictureElement.querySelector('img').height = IMG_HEIGHT;
   };
@@ -23,7 +25,15 @@ var getPictureElement = function(picture) {
   imageTimeout = setTimeout(function() {
     pictureElement.classList.add('picture-load-failure');
   }, IMAGE_LOAD_TIMEOUT);
-  image.setAttribute('src', picture.url);
+  image.setAttribute('src', picture.url || picture.preview);
+  
+  pictureElement.onclick = function(event) {
+    event.preventDefault();
+
+    if(!pictureElement.classList.contains('picture-load-failure')) {
+      gallery.show(num);
+    }
+  };
   return pictureElement;
 };
 
