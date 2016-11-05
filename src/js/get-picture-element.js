@@ -26,7 +26,6 @@ var getPictureElement = function(picture, num) {
     pictureElement.classList.add('picture-load-failure');
   }, IMAGE_LOAD_TIMEOUT);
   image.setAttribute('src', picture.url || picture.preview);
-  
   pictureElement.onclick = function(event) {
     event.preventDefault();
 

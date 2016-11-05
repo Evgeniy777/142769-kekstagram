@@ -13,8 +13,8 @@ module.exports = function() {
   var showFilters = function() {
     document.querySelector('.filters').classList.remove('hidden');
   };
-  
   var renderPictures = function(pictures) {
+    hideFilters();
     pictures.forEach(function(picture, num) {
       container.appendChild(getPictureElement(picture, num));
     });

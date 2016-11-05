@@ -6,7 +6,7 @@
  */
 
 'use strict';
-module.exports = function () {
+module.exports = function() {
   (function() {
     /** @enum {string} */
     var FileType = {
