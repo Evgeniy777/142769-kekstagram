@@ -2,7 +2,6 @@
 module.exports = function() {
   var gallery = require('./gallery');
   var load = require('./load');
-  var getPictureElement = require('./get-picture-element');
   var Picture = require('./picture');
   var container = document.querySelector('.pictures.container');
   var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
