@@ -37,10 +37,10 @@ Gallery.prototype.hide = function() {
 Gallery.prototype.setActivePicture = function(num) {
   this.activePicture = num;
   if((document.querySelector('img[src="' + this.pictures[num].url + '"]')) ||
-     (document.querySelector('img[src="' + this.pictures[num].preview + '"]'))) {
-     this.galleryImage.src = (document.querySelector('img[src="' + this.pictures[num].url + '"]')) ? (this.pictures[num].url) : (this.pictures[num].preview);
+    (document.querySelector('img[src="' + this.pictures[num].preview + '"]'))) {
+    this.galleryImage.src = (document.querySelector('img[src="' + this.pictures[num].url + '"]')) ? (this.pictures[num].url) : (this.pictures[num].preview);
   } else {
-     this.galleryImage.src = 'img/icon-warning.png';
+    this.galleryImage.src = 'img/icon-warning.png';
   }
   document.querySelector('.likes-count').textContent = this.pictures[num].likes;
   document.querySelector('.comments-count').textContent = this.pictures[num].comments;
