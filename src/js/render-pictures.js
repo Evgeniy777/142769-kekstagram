@@ -1,8 +1,9 @@
 'use strict';
 module.exports = function() {
-  var load = require('./load');
   var gallery = require('./gallery');
+  var load = require('./load');
   var getPictureElement = require('./get-picture-element');
+  var Picture = require('./picture');
   var container = document.querySelector('.pictures.container');
   var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
 
@@ -16,7 +17,7 @@ module.exports = function() {
   var renderPictures = function(pictures) {
     hideFilters();
     pictures.forEach(function(picture, num) {
-      container.appendChild(getPictureElement(picture, num));
+      container.appendChild(new Picture(picture, num).element);
     });
     gallery.setPictures(pictures);
     showFilters();
