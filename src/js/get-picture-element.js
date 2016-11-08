@@ -1,7 +1,6 @@
 'use strict';
 
-var getPictureElement = function(picture, num) {
-  var gallery = require('./gallery');
+var getPictureElement = function(picture) {
   var template = document.querySelector('#picture-template');
   var templateContainer = 'content' in template ? template.content : template;
   var IMG_WIDTH = 182;
@@ -26,13 +25,6 @@ var getPictureElement = function(picture, num) {
     pictureElement.classList.add('picture-load-failure');
   }, IMAGE_LOAD_TIMEOUT);
   image.setAttribute('src', picture.preview || picture.url);
-  pictureElement.onclick = function(event) {
-    event.preventDefault();
-
-    if(!pictureElement.classList.contains('picture-load-failure')) {
-      gallery.show(num);
-    }
-  };
   return pictureElement;
 };
 
