@@ -36,7 +36,12 @@ Gallery.prototype.hide = function() {
 
 Gallery.prototype.setActivePicture = function(num) {
   this.activePicture = num;
-  this.galleryImage.src = (document.querySelector('img[src="' + this.pictures[num].url + '"]')) ? (this.pictures[num].url) : 'img/icon-warning.png';
+  if((document.querySelector('img[src="' + this.pictures[num].url + '"]')) ||
+     (document.querySelector('img[src="' + this.pictures[num].preview + '"]'))) {
+     this.galleryImage.src = (document.querySelector('img[src="' + this.pictures[num].url + '"]')) ? (this.pictures[num].url) : (this.pictures[num].preview);
+  } else {
+     this.galleryImage.src = 'img/icon-warning.png';
+  }
   document.querySelector('.likes-count').textContent = this.pictures[num].likes;
   document.querySelector('.comments-count').textContent = this.pictures[num].comments;
 };
