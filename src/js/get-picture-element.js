@@ -15,7 +15,7 @@ var getPictureElement = function(picture, num) {
   var imageTimeout = null;
   image.onload = function() {
     clearTimeout(imageTimeout);
-    pictureElement.querySelector('img').src = picture.url || picture.preview;
+    pictureElement.querySelector('img').src = picture.preview || picture.url;
     pictureElement.querySelector('img').width = IMG_WIDTH;
     pictureElement.querySelector('img').height = IMG_HEIGHT;
   };
@@ -25,7 +25,7 @@ var getPictureElement = function(picture, num) {
   imageTimeout = setTimeout(function() {
     pictureElement.classList.add('picture-load-failure');
   }, IMAGE_LOAD_TIMEOUT);
-  image.setAttribute('src', picture.url || picture.preview);
+  image.setAttribute('src', picture.preview || picture.url);
   pictureElement.onclick = function(event) {
     event.preventDefault();
 
