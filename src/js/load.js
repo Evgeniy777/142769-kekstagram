@@ -1,13 +1,18 @@
 'use strict';
-var load = function(url, callback, callbackName) {
-  if (!callbackName) {
-    callbackName = 'cb' + Date.now();
-  }
-  window[callbackName] = function(data) {
+
+module.exports = function(url, params, callback) {
+  var getSearchString = function(params) {
+    return Object.keys(params).map(function(param) {
+    return [param, params[param]].join('=');
+    }).join('&');
+  };
+  var xhr = new XMLHttpRequest();
+
+  xhr.onload = function(evt) {
+    var data = JSON.parse(evt.target.response);
     callback(data);
   };
-  var script = document.createElement('script');
-  script.src = url + '?callback=' + callbackName;
-  document.body.appendChild(script);
+
+  xhr.open('GET', url + '?' + getSearchString(params));
+  xhr.send();
 };
-module.exports = load;
