@@ -20,7 +20,6 @@ module.exports = function() {
   var showFilters = function() {
     document.querySelector('.filters').classList.remove('hidden');
   };
-  
   var renderPictures = function(pictures) {
     hideFilters();
     pictures.forEach(function(picture, num) {
@@ -29,7 +28,6 @@ module.exports = function() {
     gallery.setPictures(pictures);
     showFilters();
   };
-  
   var loadPictures = function(filter, currentPageNumber) {
     var params = {
       from: currentPageNumber * pageSize,
@@ -38,8 +36,7 @@ module.exports = function() {
     };
     load(PICTURES_LOAD_URL, params, renderPictures);
   };
-  
-  var changeFilter = function (filterID) {
+  var changeFilter = function(filterID) {
     container.innerHTML = '';
     activeFilter = filterID;
     pageNumber = 0;
@@ -50,9 +47,7 @@ module.exports = function() {
     changeFilter(activeFilter);
     console.log(activeFilter);
   }, true);
-  
   var lastCall = Date.now();
-  
   window.addEventListener('scroll', function() {
     console.log('scroll');
     if (Date.now() - lastCall >= THROTTLE_TIMEOUT) {
@@ -63,7 +58,5 @@ module.exports = function() {
       lastCall = Date.now();
     }
   });
-  
   changeFilter(activeFilter);
-  
 };
