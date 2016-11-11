@@ -2,5 +2,4 @@
 
 module.exports = function(list, from, to) {
   return list.slice(from, to);
-  console.log('list');
 };

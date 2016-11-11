@@ -1,17 +1,17 @@
 'use strict';
 
 module.exports = function (list, filterID) {
+  var THREE_DAYS = 3 * 24 * 60 * 60 * 1000;
   
   switch (filterID) {
   case 'filter-popular':
-    return list.sort(function (a, b) {
-      return b.likes - a.likes;
-    });
+    var regularOrder = list;
+    return regularOrder;
     break;
 
   case 'filter-new':
     return list.filter(function (item) {
-      return (Date.now() - item.created) <= (3 * 24 * 60 * 60 * 1000);
+      return (Date.now() - item.created) <= (THREE_DAYS);
     }).sort(function (a, b) {
       return b.created - a.created;
     });
