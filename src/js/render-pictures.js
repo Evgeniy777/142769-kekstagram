@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function () {
+module.exports = function() {
   var gallery = require('./gallery');
   var load = require('./load');
   var Picture = require('./picture');
@@ -13,15 +13,15 @@ module.exports = function () {
   var filters = document.querySelector('.filters');
   var footer = document.querySelector('footer');
 
-  var hideFilters = function () {
+  var hideFilters = function() {
     document.querySelector('.filters').classList.add('hidden');
   };
 
-  var showFilters = function () {
+  var showFilters = function() {
     document.querySelector('.filters').classList.remove('hidden');
   };
   
-  var renderPictures = function (pictures) {
+  var renderPictures = function(pictures) {
     hideFilters();
     pictures.forEach(function(picture, num) {
       container.appendChild(new Picture(picture, num).element);
@@ -30,7 +30,7 @@ module.exports = function () {
     showFilters();
   };
   
-  var loadPictures = function (filter, currentPageNumber) {
+  var loadPictures = function(filter, currentPageNumber) {
     var params = {
       from: currentPageNumber * pageSize,
       to: currentPageNumber * pageSize + pageSize,
@@ -45,26 +45,25 @@ module.exports = function () {
     pageNumber = 0;
     loadPictures(activeFilter, pageNumber);
   };
-  
-  filters.addEventListener('change', function (evt) {
+  filters.addEventListener('change', function(evt) {
     activeFilter = evt.target.getAttribute('id');
     changeFilter(activeFilter);
     console.log(activeFilter);
   }, true);
   
   var lastCall = Date.now();
-
-  window.addEventListener('scroll', function () {
+  
+  window.addEventListener('scroll', function() {
     console.log('scroll');
     if (Date.now() - lastCall >= THROTTLE_TIMEOUT) {
       console.log('complex scroll');
       if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
         loadPictures(activeFilter, ++pageNumber);
       }
-
       lastCall = Date.now();
     }
   });
-
+  
   changeFilter(activeFilter);
+  
 };

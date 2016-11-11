@@ -3,7 +3,7 @@
 module.exports = function(url, params, callback) {
   var getSearchString = function(params) {
     return Object.keys(params).map(function(param) {
-    return [param, params[param]].join('=');
+      return [param, params[param]].join('=');
     }).join('&');
   };
   var xhr = new XMLHttpRequest();
