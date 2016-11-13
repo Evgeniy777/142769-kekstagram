@@ -35,6 +35,7 @@ module.exports = function() {
       filter: filter
     };
     load(PICTURES_LOAD_URL, params, renderPictures);
+    addMorePictures();
   };
   var changeFilter = function(filterID) {
     container.innerHTML = '';
@@ -58,5 +59,14 @@ module.exports = function() {
       lastCall = Date.now();
     }
   });
+  var addMorePictures = function() {
+    if (footer.getBoundingClientRect().bottom - container.getBoundingClientRect().bottom > GAP) {
+      var params = {
+        from: 0,
+        to: pageSize
+      };
+      load(PICTURES_LOAD_URL, params, renderPictures);
+    }
+  };
   changeFilter(activeFilter);
 };
