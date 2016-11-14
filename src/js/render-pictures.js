@@ -63,7 +63,7 @@ module.exports = function() {
     if (footer.getBoundingClientRect().bottom - container.getBoundingClientRect().bottom > GAP) {
       var params = {
         from: 0,
-        to: pageSize
+        to: 12
       };
       load(PICTURES_LOAD_URL, params, renderPictures);
     }
