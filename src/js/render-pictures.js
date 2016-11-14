@@ -4,7 +4,14 @@ module.exports = function() {
   var load = require('./load');
   var Picture = require('./picture');
   var container = document.querySelector('.pictures.container');
-  var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
+  var PICTURES_LOAD_URL = '/api/pictures';
+  var THROTTLE_TIMEOUT = 200;
+  var GAP = 100;
+  var pageNumber = 0;
+  var pageSize = 12;
+  var activeFilter = 'filter-popular';
+  var filters = document.querySelector('.filters');
+  var footer = document.querySelector('footer');
 
   var hideFilters = function() {
     document.querySelector('.filters').classList.add('hidden');
@@ -21,6 +28,45 @@ module.exports = function() {
     gallery.setPictures(pictures);
     showFilters();
   };
-
-  load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
+  var loadPictures = function(filter, currentPageNumber) {
+    var params = {
+      from: currentPageNumber * pageSize,
+      to: currentPageNumber * pageSize + pageSize,
+      filter: filter
+    };
+    load(PICTURES_LOAD_URL, params, renderPictures);
+    addMorePictures();
+  };
+  var changeFilter = function(filterID) {
+    container.innerHTML = '';
+    activeFilter = filterID;
+    pageNumber = 0;
+    loadPictures(activeFilter, pageNumber);
+  };
+  filters.addEventListener('change', function(evt) {
+    activeFilter = evt.target.getAttribute('id');
+    changeFilter(activeFilter);
+    console.log(activeFilter);
+  }, true);
+  var lastCall = Date.now();
+  window.addEventListener('scroll', function() {
+    console.log('scroll');
+    if (Date.now() - lastCall >= THROTTLE_TIMEOUT) {
+      console.log('complex scroll');
+      if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
+        loadPictures(activeFilter, ++pageNumber);
+      }
+      lastCall = Date.now();
+    }
+  });
+  var addMorePictures = function() {
+    if (footer.getBoundingClientRect().bottom - container.getBoundingClientRect().bottom > GAP) {
+      var params = {
+        from: 0,
+        to: pageSize
+      };
+      load(PICTURES_LOAD_URL, params, renderPictures);
+    }
+  };
+  changeFilter(activeFilter);
 };
