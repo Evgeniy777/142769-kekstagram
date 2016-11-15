@@ -314,14 +314,11 @@ module.exports = function() {
       // состояние или просто перезаписывать.
       filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
     });
-    
-    var uploadResizeForm = document.querySelector('#upload-resize');
     window.addEventListener('resizerchange', function() {
       inputX.value = currentResizer.getConstraint().x;
       inputY.value = currentResizer.getConstraint().y;
       inputSize.value = currentResizer.getConstraint().side;
     });
-    
     var changeResizeValue = function() {
       inputX.addEventListener('input', function() {
         currentResizer.moveConstraint(inputX.value - currentResizer.getConstraint().x, 0, 0);
@@ -333,8 +330,7 @@ module.exports = function() {
         currentResizer.moveConstraint(0, 0, inputSize.value - currentResizer.getConstraint().side);
       });
     };
-      changeResizeValue();
-    
+    changeResizeValue();
     cleanupResizer();
     updateBackground();
   })();
