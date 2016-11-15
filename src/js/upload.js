@@ -316,24 +316,24 @@ module.exports = function() {
     });
     
     var uploadResizeForm = document.querySelector('#upload-resize');
-    var currentLeftShift = document.querySelector('#resize-x');
-    var currentTopShift = document.querySelector('#resize-y');
-    var currentSideSize = document.querySelector('#resize-size');
     window.addEventListener('resizerchange', function() {
-      currentLeftShift.value = currentResizer.getConstraint().x;
-      currentTopShift.value = currentResizer.getConstraint().y;
-      currentSideSize.value = currentResizer.getConstraint().side;
-      var changeResizeValue = function() {
-        var leftShift = currentLeftShift.value - currentResizer.getConstraint().x;
-        var topShift = currentTopShift.value - currentResizer.getConstraint().y;
-        var sideSize = currentSideSize.value - currentResizer.getConstraint().side;
-        console.log(leftShift);
-        console.log(topShift);
-        console.log(sideSize);
-        currentResizer.moveConstraint(-1, -1, -1);
-      }
-      uploadResizeForm.addEventListener('change', changeResizeValue, true);
+      inputX.value = currentResizer.getConstraint().x;
+      inputY.value = currentResizer.getConstraint().y;
+      inputSize.value = currentResizer.getConstraint().side;
     });
+    
+    var changeResizeValue = function() {
+      inputX.addEventListener('input', function() {
+        currentResizer.moveConstraint(inputX.value - currentResizer.getConstraint().x, 0, 0);
+      });
+      inputY.addEventListener('input', function() {
+        currentResizer.moveConstraint(0, inputY.value - currentResizer.getConstraint().y, 0);
+      });
+      inputSize.addEventListener('input', function() {
+        currentResizer.moveConstraint(0, 0, inputSize.value - currentResizer.getConstraint().side);
+      });
+    };
+      changeResizeValue();
     
     cleanupResizer();
     updateBackground();
