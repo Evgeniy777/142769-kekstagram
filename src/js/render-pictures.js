@@ -65,5 +65,16 @@ module.exports = function() {
       load(PICTURES_LOAD_URL, params, renderPictures);
     }
   };
+  var throttle = function(func, timeout) {
+    if (Date.now() - lastCall >= timeout) {
+      console.log('scroll');
+      func();
+    }
+    lastCall = Date.now();
+  };
+  var optimizedScroll = throttle(function() {
+    console.log('scrollLLLLLL');
+  }, 100);
+  window.addEventListener('scroll', optimizedScroll);
   changeFilter(activeFilter);
 };
