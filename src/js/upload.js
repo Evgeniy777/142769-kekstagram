@@ -81,19 +81,18 @@ module.exports = function() {
     inputY.value = 0;
     inputSize.value = 0;
     var resizeFormIsValid = function() {
-      if(!(((inputX.value + inputSize.value) < currentResizer._image.naturalWidth) &&
-        ((inputY.value + inputSize.value) < currentResizer._image.naturalHeight) &&
-        ((inputX.value >= 0)) &&
-        ((inputY.value >= 0)))) {
-        return false;
-      } else {
+      if(((parseInt(inputX.value) + parseInt(inputSize.value)) < currentResizer._image.naturalWidth) &&
+        ((parseInt(inputY.value) + parseInt(inputSize.value)) < currentResizer._image.naturalHeight) &&
+        ((parseInt(inputX.value) >= 0)) &&
+        ((parseInt(inputY.value) >= 0))) {
         return true;
+      } else {
+        return false;
       }
     };
     var addHandlers = function() {
       for(var i = 0; i < inputsLength; i++) {
-        inputs[i].addEventListener('imput', function() {
-          resizeFormIsValid();
+        inputs[i].addEventListener('input', function() {
           if(resizeFormIsValid()) {
             sendButton.removeAttribute('disabled');
           } else {
@@ -218,7 +217,7 @@ module.exports = function() {
      * кропнутое изображение в форму добавления фильтра и показывает ее.
      * @param {Event} evt
      */
-    resizeForm.addEventListener('sumbit', function(evt) {
+    resizeForm.addEventListener('submit', function(evt) {
       evt.preventDefault();
 
       if (resizeFormIsValid()) {
