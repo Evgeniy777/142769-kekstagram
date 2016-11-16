@@ -81,10 +81,10 @@ module.exports = function() {
     inputY.value = 0;
     inputSize.value = 0;
     var resizeFormIsValid = function() {
-      if(((parseInt(inputX.value,10) + parseInt(inputSize.value,10)) < currentResizer._image.naturalWidth) &&
-        ((parseInt(inputY.value,10) + parseInt(inputSize.value,10)) < currentResizer._image.naturalHeight) &&
-        ((parseInt(inputX.value,10) >= 0)) &&
-        ((parseInt(inputY.value,10) >= 0))) {
+      if(((parseInt(inputX.value, 10) + parseInt(inputSize.value, 10)) < currentResizer._image.naturalWidth) &&
+        ((parseInt(inputY.value, 10) + parseInt(inputSize.value, 10)) < currentResizer._image.naturalHeight) &&
+        ((parseInt(inputX.value, 10) >= 0)) &&
+        ((parseInt(inputY.value, 10) >= 0))) {
         return true;
       } else {
         return false;
