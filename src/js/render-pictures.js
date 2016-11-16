@@ -47,15 +47,6 @@ module.exports = function() {
     activeFilter = evt.target.getAttribute('id');
     changeFilter(activeFilter);
   }, true);
-  var lastCall = Date.now();
-  window.addEventListener('scroll', function() {
-    if (Date.now() - lastCall >= THROTTLE_TIMEOUT) {
-      if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
-        loadPictures(activeFilter, ++pageNumber);
-      }
-      lastCall = Date.now();
-    }
-  });
   var addMorePictures = function() {
     if (footer.getBoundingClientRect().bottom - container.getBoundingClientRect().bottom > GAP) {
       var params = {
@@ -65,15 +56,19 @@ module.exports = function() {
       load(PICTURES_LOAD_URL, params, renderPictures);
     }
   };
-  var throttle = function(func, timeout) {
-    if (Date.now() - lastCall >= timeout) {
-      console.log('scroll');
-      func();
+  function throttle(func, timeout) {
+    var lastCall = Date.now();
+    return function() {
+      if (Date.now() - lastCall >= timeout) {
+        func();
+        lastCall = Date.now();
+      }
     }
-    lastCall = Date.now();
-  };
+  }
   var optimizedScroll = throttle(function() {
-    console.log('scrollLLLLLL');
+    if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
+      loadPictures(activeFilter, ++pageNumber);
+    }
   }, 100);
   window.addEventListener('scroll', optimizedScroll);
   changeFilter(activeFilter);
