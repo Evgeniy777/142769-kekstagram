@@ -5,7 +5,6 @@ module.exports = function() {
   var Picture = require('./picture');
   var container = document.querySelector('.pictures.container');
   var PICTURES_LOAD_URL = '/api/pictures';
-  var THROTTLE_TIMEOUT = 200;
   var GAP = 100;
   var pageNumber = 0;
   var pageSize = 12;
@@ -63,7 +62,7 @@ module.exports = function() {
         func();
         lastCall = Date.now();
       }
-    }
+    };
   }
   var optimizedScroll = throttle(function() {
     if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
