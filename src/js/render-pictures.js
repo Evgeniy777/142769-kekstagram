@@ -46,13 +46,10 @@ module.exports = function() {
   filters.addEventListener('change', function(evt) {
     activeFilter = evt.target.getAttribute('id');
     changeFilter(activeFilter);
-    console.log(activeFilter);
   }, true);
   var lastCall = Date.now();
   window.addEventListener('scroll', function() {
-    console.log('scroll');
     if (Date.now() - lastCall >= THROTTLE_TIMEOUT) {
-      console.log('complex scroll');
       if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
         loadPictures(activeFilter, ++pageNumber);
       }
@@ -63,7 +60,7 @@ module.exports = function() {
     if (footer.getBoundingClientRect().bottom - container.getBoundingClientRect().bottom > GAP) {
       var params = {
         from: 0,
-        to: pageSize
+        to: 12
       };
       load(PICTURES_LOAD_URL, params, renderPictures);
     }
