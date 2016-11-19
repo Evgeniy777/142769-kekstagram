@@ -93,7 +93,6 @@ module.exports = function() {
     var addHandlers = function() {
       for(var i = 0; i < inputsLength; i++) {
         inputs[i].addEventListener('input', function() {
-          resizeFormIsValid();
           if(resizeFormIsValid()) {
             sendButton.removeAttribute('disabled');
           } else {
