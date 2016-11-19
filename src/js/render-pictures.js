@@ -35,13 +35,13 @@ module.exports = function() {
       filter: filter
     };
     load(PICTURES_LOAD_URL, params, renderPictures);
-    addMorePictures();
   };
   var changeFilter = function(filterID) {
     container.innerHTML = '';
     activeFilter = filterID;
     pageNumber = 0;
     loadPictures(activeFilter, pageNumber);
+    addMorePictures();
   };
   filters.addEventListener('change', function(evt) {
     activeFilter = evt.target.getAttribute('id');
@@ -57,12 +57,12 @@ module.exports = function() {
     }
   });
   var addMorePictures = function() {
-    if (footer.getBoundingClientRect().bottom - container.getBoundingClientRect().bottom > GAP) {
-      var params = {
-        from: 0,
-        to: 12
-      };
-      load(PICTURES_LOAD_URL, params, renderPictures);
+    var scrollHeight = document.body.scrollHeight;
+    var clientHeight = document.body.clientHeight;
+    console.log(scrollHeight);
+    console.log(clientHeight);
+    if(clientHeight < scrollHeight) {
+      loadPictures(activeFilter, ++pageNumber);
     }
   };
   changeFilter(activeFilter);
