@@ -51,7 +51,7 @@ module.exports = function() {
     var clientHeight = document.body.clientHeight;
     console.log(scrollHeight);
     console.log(clientHeight);
-    if(clientHeight < scrollHeight) {
+    if(clientHeight <= scrollHeight) {
       loadPictures(activeFilter, ++pageNumber);
     }
   };
