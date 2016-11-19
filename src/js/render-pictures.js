@@ -5,7 +5,6 @@ module.exports = function() {
   var Picture = require('./picture');
   var container = document.querySelector('.pictures.container');
   var PICTURES_LOAD_URL = '/api/pictures';
-  var THROTTLE_TIMEOUT = 200;
   var GAP = 100;
   var pageNumber = 0;
   var pageSize = 12;
@@ -35,35 +34,39 @@ module.exports = function() {
       filter: filter
     };
     load(PICTURES_LOAD_URL, params, renderPictures);
-    addMorePictures();
   };
   var changeFilter = function(filterID) {
     container.innerHTML = '';
     activeFilter = filterID;
     pageNumber = 0;
     loadPictures(activeFilter, pageNumber);
+    addMorePictures();
   };
   filters.addEventListener('change', function(evt) {
     activeFilter = evt.target.getAttribute('id');
     changeFilter(activeFilter);
   }, true);
-  var lastCall = Date.now();
-  window.addEventListener('scroll', function() {
-    if (Date.now() - lastCall >= THROTTLE_TIMEOUT) {
-      if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
-        loadPictures(activeFilter, ++pageNumber);
-      }
-      lastCall = Date.now();
-    }
-  });
   var addMorePictures = function() {
-    if (footer.getBoundingClientRect().bottom - container.getBoundingClientRect().bottom > GAP) {
-      var params = {
-        from: 0,
-        to: 12
-      };
-      load(PICTURES_LOAD_URL, params, renderPictures);
+    var scrollHeight = document.body.scrollHeight;
+    var clientHeight = document.body.clientHeight;
+    if(clientHeight <= scrollHeight) {
+      loadPictures(activeFilter, ++pageNumber);
     }
   };
+  function throttle(func, timeout) {
+    var lastCall = Date.now();
+    return function() {
+      if (Date.now() - lastCall >= timeout) {
+        func();
+        lastCall = Date.now();
+      }
+    };
+  }
+  var optimizedScroll = throttle(function() {
+    if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
+      loadPictures(activeFilter, ++pageNumber);
+    }
+  }, 100);
+  window.addEventListener('scroll', optimizedScroll);
   changeFilter(activeFilter);
 };

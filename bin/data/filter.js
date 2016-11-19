@@ -23,6 +23,4 @@ module.exports = function (list, filterID) {
     });
     break;
   }
-  
-  return list;
 };

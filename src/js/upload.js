@@ -255,41 +255,28 @@ module.exports = function() {
     var uploadFilterForm = document.getElementById('upload-filter');
     filterForm.addEventListener('submit', function(evt) {
       evt.preventDefault();
-
       cleanupResizer();
       updateBackground();
-      function getLastGraceBirthday() {
-        var graceBirthday = new Date('1906-12-02');
-        var today = new Date();
-        if(today < (new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate()))) {
-          return new Date(today.getFullYear() - 1, graceBirthday.getMonth(), graceBirthday.getDate());
-        } else {
-          return new Date(today.getFullYear(), graceBirthday.getMonth(), graceBirthday.getDate());
-        }
-      }
       function getLastSelectedFilter() {
         return uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
       }
-      function getExpireDate() {
-        return Math.floor((getLastGraceBirthday() / (1000 * 60 * 60 * 24)));
+      function setLocalStorage() {
+        localStorage.setItem('upload-filter', getLastSelectedFilter());
       }
-      function setCookie() {
-        window.Cookies.set('upload-filter', getLastSelectedFilter(), { expires: getExpireDate() });
-      }
-      setCookie();
+      setLocalStorage();
       filterForm.classList.add('invisible');
       uploadForm.classList.remove('invisible');
     });
-    function restoredFromCookie() {
-      var stored = window.Cookies.get('upload-filter');
+    function restoredFromLocalStorage() {
+      var stored = localStorage.getItem('upload-filter');
       if(stored && stored.length > 0) {
         uploadFilterForm.querySelector('input:checked').removeAttribute('checked');
         var uploadedFilter = uploadFilterForm.querySelector('input[value=' + stored + ']');
         uploadedFilter.setAttribute('checked', 'checked');
-        filterImage.className = 'filter-image-preview filter-' + window.Cookies.get('upload-filter');
+        filterImage.className = 'filter-image-preview filter-' + stored;
       }
     }
-    restoredFromCookie();
+    restoredFromLocalStorage();
     /**
      * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
      * выбранному значению в форме.
