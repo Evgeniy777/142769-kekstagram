@@ -49,7 +49,7 @@ module.exports = function() {
   var addMorePictures = function() {
     var scrollHeight = document.body.scrollHeight;
     var clientHeight = document.body.clientHeight;
-    if(clientHeight < scrollHeight) {
+    if(clientHeight <= scrollHeight) {
       loadPictures(activeFilter, ++pageNumber);
     }
   };
