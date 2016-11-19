@@ -261,7 +261,7 @@ module.exports = function() {
         return uploadFilterForm.querySelector('input[name="upload-filter"]:checked').getAttribute('value');
       }
       function setLocalStorage() {
-        localStorage.setItem('upload-filter',getLastSelectedFilter());
+        localStorage.setItem('upload-filter', getLastSelectedFilter());
       }
       setLocalStorage();
       filterForm.classList.add('invisible');
