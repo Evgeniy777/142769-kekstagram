@@ -49,8 +49,6 @@ module.exports = function() {
   var addMorePictures = function() {
     var scrollHeight = document.body.scrollHeight;
     var clientHeight = document.body.clientHeight;
-    console.log(scrollHeight);
-    console.log(clientHeight);
     if(clientHeight <= scrollHeight) {
       loadPictures(activeFilter, ++pageNumber);
     }
