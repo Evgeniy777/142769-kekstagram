@@ -6,6 +6,7 @@ module.exports = function() {
   var container = document.querySelector('.pictures.container');
   var PICTURES_LOAD_URL = '/api/pictures';
   var GAP = 100;
+  var pictures = [];
   var pageNumber = 0;
   var pageSize = 12;
   var activeFilter = 'filter-popular';
@@ -19,11 +20,20 @@ module.exports = function() {
   var showFilters = function() {
     document.querySelector('.filters').classList.remove('hidden');
   };
-  var renderPictures = function(pictures) {
+  var renderPictures = function(loadedPictures) {
     hideFilters();
-    pictures.forEach(function(picture, num) {
+    pictures = pictures.concat(loadedPictures);
+    if(pictures.length > loadedPictures.length) {
+      var picNum = pictures.length - loadedPictures.length;
+    }
+    loadedPictures.forEach(function(picture, num) {
+      if (picNum >= loadedPictures.length) {
+        num = picNum;
+      }
       container.appendChild(new Picture(picture, num).element);
+      picNum++;
     });
+    addMorePictures();
     gallery.setPictures(pictures);
     showFilters();
   };
@@ -39,8 +49,8 @@ module.exports = function() {
     container.innerHTML = '';
     activeFilter = filterID;
     pageNumber = 0;
+    pictures = [];
     loadPictures(activeFilter, pageNumber);
-    addMorePictures();
   };
   filters.addEventListener('change', function(evt) {
     activeFilter = evt.target.getAttribute('id');
