@@ -9,7 +9,7 @@ var Picture = function(data, num) {
   this.onPictureClick = this.onPictureClick.bind(this);
   this.element.addEventListener('click', this.onPictureClick);
 };
-Picture.prototype.onPictureClick = function(event, num) {
+Picture.prototype.onPictureClick = function(event) {
   event.preventDefault();
   if(!event.target.classList.contains('picture-load-failure')) {
     gallery.show(this.pictureNumber);
