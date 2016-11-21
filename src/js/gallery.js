@@ -1,6 +1,9 @@
 'use strict';
 
+var BaseComponent = require('./base-component');
+var inherit = require('./utils');
 var Gallery = function() {
+  BaseComponent.call(this);
   this.pictures = [];
   this.activePicture = 0;
   this.gallery = document.querySelector('.gallery-overlay');
@@ -11,6 +14,8 @@ var Gallery = function() {
   this.galleryImage.addEventListener('click', this.showNext);
   this.galleryClose.addEventListener('click', this.hide);
 };
+
+inherit(BaseComponent, Gallery);
 
 Gallery.prototype.setPictures = function(pictures) {
   this.pictures = pictures;
