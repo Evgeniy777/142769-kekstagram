@@ -1,7 +1,7 @@
 'use strict';
 
 var BaseComponent = require('./base-component');
-var inherit = require('./utils');
+var inherit = require('./inherit');
 var Gallery = function() {
   BaseComponent.call(this);
   this.pictures = [];
