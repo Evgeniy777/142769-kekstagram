@@ -32,7 +32,7 @@ module.exports = function() {
     if(clientHeight < scrollHeight) {
       loadPictures(activeFilter, ++pageNumber);
     }
-  };
+  }
   var renderPictures = function(loadedPictures) {
     hideFilters();
     pictures = pictures.concat(loadedPictures);
