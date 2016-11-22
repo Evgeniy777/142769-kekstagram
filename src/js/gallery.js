@@ -23,7 +23,6 @@ Gallery.prototype.setPictures = function(pictures) {
 
 Gallery.prototype.setActivePicture = function(num) {
   this.activePicture = num;
-  console.log(num);
   if((document.querySelector('img[src="' + this.pictures[num].url + '"]')) ||
     (document.querySelector('img[src="' + this.pictures[num].preview + '"]'))) {
     this.galleryImage.src = (document.querySelector('img[src="' + this.pictures[num].url + '"]')) ? (this.pictures[num].url) : (this.pictures[num].preview);

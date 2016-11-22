@@ -20,10 +20,23 @@ module.exports = function() {
   var showFilters = function() {
     document.querySelector('.filters').classList.remove('hidden');
   };
+  var optimizedScroll = throttle(function() {
+    if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
+      loadPictures(activeFilter, ++pageNumber);
+    }
+  }, 100);
+  window.addEventListener('scroll', optimizedScroll);
+  function addMorePictures() {
+    var scrollHeight = document.body.scrollHeight;
+    var clientHeight = document.body.clientHeight;
+    if(clientHeight < scrollHeight) {
+      loadPictures(activeFilter, ++pageNumber);
+    }
+  };
   var renderPictures = function(loadedPictures) {
     hideFilters();
     pictures = pictures.concat(loadedPictures);
-    if(pictures.length > loadedPictures.length) {
+    if(pictures.length >= loadedPictures.length) {
       var picNum = pictures.length - loadedPictures.length;
     }
     loadedPictures.forEach(function(picture, num) {
@@ -56,13 +69,6 @@ module.exports = function() {
     activeFilter = evt.target.getAttribute('id');
     changeFilter(activeFilter);
   }, true);
-  var addMorePictures = function() {
-    var scrollHeight = document.body.scrollHeight;
-    var clientHeight = document.body.clientHeight;
-    if(clientHeight <= scrollHeight) {
-      loadPictures(activeFilter, ++pageNumber);
-    }
-  };
   function throttle(func, timeout) {
     var lastCall = Date.now();
     return function() {
@@ -72,11 +78,5 @@ module.exports = function() {
       }
     };
   }
-  var optimizedScroll = throttle(function() {
-    if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
-      loadPictures(activeFilter, ++pageNumber);
-    }
-  }, 100);
-  window.addEventListener('scroll', optimizedScroll);
   changeFilter(activeFilter);
 };
