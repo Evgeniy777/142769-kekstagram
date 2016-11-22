@@ -36,15 +36,11 @@ module.exports = function() {
   var renderPictures = function(loadedPictures) {
     hideFilters();
     pictures = pictures.concat(loadedPictures);
-    if(pictures.length >= loadedPictures.length) {
-      var picNum = pictures.length - loadedPictures.length;
-    }
     loadedPictures.forEach(function(picture, num) {
-      if (picNum >= loadedPictures.length) {
-        num = picNum;
+      if(pictures.length >= loadedPictures.length) {
+        num += pictures.length - loadedPictures.length;
       }
       container.appendChild(new Picture(picture, num).element);
-      picNum++;
     });
     addMorePictures();
     gallery.setPictures(pictures);
